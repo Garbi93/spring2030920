@@ -30,11 +30,24 @@ public class Controller04 {
 
     // @RequestParam 생략하여서 사용도 가능하다
     // /main4/sub3?name=son&married=true
+    // 단축 한곳에서는 requred가 true 가 아니기 때문에 주소창에 값을 안 넣어도 null로 출력 해준다.
     @RequestMapping("sub3")
     public void method3(String name, Boolean married) {
         System.out.println("name = " + name);
         System.out.println("married = " + married);
     }
+
+
+    // /main4/sub4?check=true&email=abc@naver.com&age=55
+    @RequestMapping("sub4")
+    public void method4(Boolean check, String email, Integer age) {
+        System.out.println("check = " + check);
+        System.out.println("email = " + email);
+        System.out.println("age = " + age);
+    }
+
+
+
 
 
 

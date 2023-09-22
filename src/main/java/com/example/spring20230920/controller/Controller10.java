@@ -60,7 +60,7 @@ public class Controller10 {
 
     @RequestMapping("sub4")
     public void method(Model model) {
-
+        model.addAttribute("myList",List.of("tesala","kia","benz"));
     }
 
 }

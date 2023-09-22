@@ -1,5 +1,6 @@
 package com.example.spring20230920.controller;
 
+import com.example.spring20230920.domain.MyDto6;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,25 @@ public class Controller08 {
     }
 
     @RequestMapping("sub2")
-    public void method2(Model model) {
+    public void method2(Model model, MyDto6 c) {
         model.addAttribute("propone","😊");
         model.addAttribute("propTWO","😎");
+        System.out.println(c);
+        model.addAttribute("name",c.getName());
 
     }
+
+    @RequestMapping("sub3")
+    public void method3(Model model) {
+        // wiew name : /main8/sub3
+        // 실제 jsp경로 -> /WEB-INF/jsp/main8/sub3.jsp
+
+        model.addAttribute("myName","Lee");
+        model.addAttribute("yourAddress","seoul");
+        model.addAttribute("herEmail","abc@gmail.com");
+        //System.out.println("Controller08.method3");
+    }
+
+
+
 }

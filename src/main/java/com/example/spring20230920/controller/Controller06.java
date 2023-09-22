@@ -20,5 +20,7 @@ public class Controller06 {
     @RequestMapping("sub2")
     public void method2 (MyDto4 obj) {
         System.out.println("obj = " + obj);
+
     }
+
 }

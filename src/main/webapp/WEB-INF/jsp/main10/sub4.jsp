@@ -35,5 +35,15 @@
 <c:forEach begin="0" end="2" var="num">
     <li>car : ${myList[num]}</li>
 </c:forEach>
+
+<hr>
+<%--items 는 반복할 리스트--%>
+<c:forEach items="${myList}" var="item">
+    <li>car : ${item}</li>
+</c:forEach>
+
+
+
+
 </body>
 </html>

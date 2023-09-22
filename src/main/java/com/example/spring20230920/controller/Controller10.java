@@ -2,12 +2,11 @@ package com.example.spring20230920.controller;
 
 import com.example.spring20230920.domain.MyDto10;
 import com.example.spring20230920.domain.MyDto9;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,5 +61,31 @@ public class Controller10 {
     public void method(Model model) {
         model.addAttribute("myList",List.of("tesala","kia","benz"));
     }
+
+    @RequestMapping("sub5")
+    public void method5(Model model) {
+        model.addAttribute("foodList", List.of(
+           "피자", "커피","김치","라면","돈까스"
+        ));
+
+        model.addAttribute("names",List.of(
+                "두식","봉석", "희수","미현"
+        ));
+    }
+
+    @RequestMapping("sub6")
+    public void method6(Model model) {
+        List<MyDto9> list = new ArrayList<>();
+        list.add(new MyDto9("31","son","hm","football",111));
+        list.add(new MyDto9("20","lee","ki","seoul",131));
+        list.add(new MyDto9("32","kim","li","busan",122));
+        list.add(new MyDto9("14","hong","ho","gimpo",123));
+        list.add(new MyDto9("20","big","ki","mokpo",321));
+
+        model.addAttribute("people", list);
+    }
+
+
+
 
 }

@@ -56,7 +56,6 @@ public class Controller09 {
     public void method4(Model model) {
         // map을 model에 넣었을때
         var map1 = Map.of("son",7,"lee",19,"kim",30);
-
         model.addAttribute("myMap", map1);
 
         var map2 = Map.of("seoul","영등포","busan","깡통시장");

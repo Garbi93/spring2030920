@@ -2,6 +2,7 @@ package com.example.spring20230920.controller;
 
 import com.example.spring20230920.domain.MyDto10;
 import com.example.spring20230920.domain.MyDto9;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,6 +85,56 @@ public class Controller10 {
 
         model.addAttribute("people", list);
     }
+
+    @RequestMapping("sub7")
+    public void method7(Model model) {
+        model.addAttribute("a",3);
+        model.addAttribute("b",5);
+
+        model.addAttribute("c", "8");
+        model.addAttribute("d", "9");
+
+
+    }
+
+    @RequestMapping("sub8")
+    public void method10 (Model model) {
+        model.addAttribute("a", 3);
+        model.addAttribute("b", 5);
+
+        model.addAttribute("c","java");
+        model.addAttribute("d","spring");
+
+        model.addAttribute("e", "11");
+        model.addAttribute("f", "2");
+        model.addAttribute("g", 2);
+        // ${ e > f } : false 주의 해야 한다. 스트링 타입끼리의 숫자는 스트링으로비교
+        // ${ e > g } : true 다른타입의 비교는 수로 비교
+        // 사용할때는 같은 타입끼리 비교하도록 주의 하자
+    }
+
+   @RequestMapping("sub9")
+    public void method9(Model model) {
+        model.addAttribute("a","java");
+        model.addAttribute("b","");
+
+        model.addAttribute("c",List.of(3,4));
+        model.addAttribute("d", List.of());
+
+        model.addAttribute("e", Map.of("name", "son"));
+        model.addAttribute("f", Map.of());
+
+        model.addAttribute("g", null);
+
+
+
+   }
+
+
+
+
+
+
 
 
 

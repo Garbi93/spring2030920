@@ -27,6 +27,7 @@ public class Controller08 {
 
     }
 
+    // 9/22일 시작 부분
     @RequestMapping("sub3")
     public void method3(Model model) {
         // wiew name : /main8/sub3

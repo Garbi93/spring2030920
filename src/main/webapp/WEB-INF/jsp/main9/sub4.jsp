@@ -18,8 +18,8 @@
 
 <hr>
 <h3>${myMap}</h3>
-<h3>${myMap["son"]}</h3>
 <%-- map의 해당 키의 값만 불러오는 법--%>
+<h3>${myMap["son"]}</h3>
 <h3>${myMap["lee"]}</h3>
 <h3>${myMap["kim"]}</h3>
 

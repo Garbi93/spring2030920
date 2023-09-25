@@ -23,10 +23,14 @@ localhost:8080/main11/sub2?dan=3
 localhost:8080/main11/sub2?dan=6
 구구단 6단 출력
 --%>
-
-<p>${param.dan}단 입니다</p>
-<e:forEach begin="1" end="9" var="i">
-    <p>${param.dan} * ${i} = ${param.dan *i}</p>
-</e:forEach>
+<c:if test="${(param.dan >= 2) and (param.dan <= 9)}">
+    <p>${param.dan}단 입니다</p>
+    <e:forEach begin="1" end="9" var="i">
+        <p>${param.dan} * ${i} = ${param.dan *i}</p>
+    </e:forEach>
+</c:if>
+<c:if test="${(empty param) or (param.dan < 2) or (param.dan > 9)}">
+    <h3>구구단의 수를 2~9 사이의 값으로 입력해주세요</h3>
+</c:if>
 </body>
 </html>

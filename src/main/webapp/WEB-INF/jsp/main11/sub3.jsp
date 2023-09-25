@@ -21,7 +21,10 @@
     <p>출력 안됨 😒</p>
 </c:if>
 
-
+<hr>
+<c:if test="${param.name eq 'son'}">
+    <p>hello son</p>
+</c:if>
 
 </body>
 </html>

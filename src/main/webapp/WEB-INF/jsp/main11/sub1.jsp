@@ -25,7 +25,7 @@
 예) name=son&age=33
 ("name", "son")
 ("age", "33")
-두 entry를 param맴에 넣어둠
+두 entry를 param맵에 넣어둠
 --%>
 <p>\${param.name} : ${param.name}}</p>
 <p>\${param.age} : ${param.age}}</p>

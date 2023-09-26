@@ -21,9 +21,8 @@
     <br>
     <%-- select(option), textarea --%>
     <button>전송</button>
-
-
 </form>
+
 <h3>전송버튼 input 예제 😎 </h3>
 <form>
 <%--

@@ -33,7 +33,8 @@ public class Controller13 {
             @RequestParam(value = "param2", defaultValue = "0") Integer param2,
             @RequestParam("param1") String param1,
             @RequestParam("param3") String param3,
-            @RequestParam(value = "param4", defaultValue = "2023-09-26") LocalDate param4,   // 날짜
+            @RequestParam(value = "param4", defaultValue = "2023-09-26")
+            LocalDate param4,   // 날짜
             // 자바에서 날짜나 시간은 LocalDate로 읽는다.
             @RequestParam(value = "param5", defaultValue = "2023-09-26T11:50:30") LocalDateTime param5, // 날짜 시간
             @RequestParam("param6") String param6,

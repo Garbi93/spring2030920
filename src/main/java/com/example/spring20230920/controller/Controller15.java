@@ -102,6 +102,10 @@ public class Controller15 {
 
         // el에서 attribute에 접근하면 좁은 영역에서부터 찾는다
         //page < request(model) < session < application
+        // 어트리뷰트를 넣을 수 있는 영역은 위의 4개가 있고
+        // 어플리케이션에는 어트리뷰트를 넣는것은 안전하지 않고
+        // 세션에 어트리뷰트를 넣는것은 비교적 안전하고
+        // 모델에 어트리뷰트를 넣는 것은 완전 안전하다.
         model.addAttribute("attr1", "돈까스");
         session.setAttribute("attr1","커피");
     }

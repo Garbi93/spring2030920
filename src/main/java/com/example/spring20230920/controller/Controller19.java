@@ -128,7 +128,37 @@ public class Controller19 {
                 list.add(map);
             }
         }
-        model.addAttribute("customer", list);
+        model.addAttribute("customers", list);
+    }
+
+    @GetMapping("sub5")
+    public void method5(Model model) throws Exception{
+        String sql = """
+                SELECT ProductID, ProductName,Unit, Price
+                FROM products
+                """;
+
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        List<Map<String, String>> list = new ArrayList<>();
+
+        try(connection; statement; resultSet) {
+            // 코드 작성
+            while (resultSet.next()){
+                Map<String, String> map = new HashMap<>();
+                map.put("pid", resultSet.getString(1));
+                map.put("productName", resultSet.getString(2));
+                map.put("unit", resultSet.getString(3));
+                map.put("price", resultSet.getString(4));
+
+                list.add(map);
+            }
+        }
+        // 코드 작성
+        model.addAttribute("productList",list);
+
     }
 
 

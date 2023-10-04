@@ -20,7 +20,7 @@
         <th>CITY</th>
         <th>COUNTRY</th>
     </tr>
-    <c:forEach items="${customer}" var="customer">
+    <c:forEach items="${customers}" var="customer">
         <tr>
             <td>${customer.id}</td>
             <td>${customer.name}</td>

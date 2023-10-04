@@ -27,6 +27,7 @@ public class Controller18 {
                 FROM customers
                 WHERE customerID = 1
                 """;
+
         // jdbc 핵심코드
         Connection connection = DriverManager.getConnection(url, username, password);
         Statement statement = connection.createStatement();
@@ -36,8 +37,7 @@ public class Controller18 {
             try(resultSet) {
                 resultSet.next();
                 String name = resultSet.getString(1);
-                // jdbc 핵심코드
-
+        // jdbc 핵심코드
 
                 model.addAttribute("customerName", name);
             }

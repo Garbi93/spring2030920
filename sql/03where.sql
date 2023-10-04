@@ -24,6 +24,8 @@ SELECT * FROM products WHERE CategoryID = 1;
 SELECT * FROM suppliers WHERE City = 'Osaka';
 
 
+
+
 -- 미국에 사는 고객의 이름들 조회
 SELECT CustomerName FROM customers WHERE Country = 'USA';
 -- 영국에 사는 고갱의 이름과 고객 번호 조회
@@ -45,4 +47,6 @@ SELECT CategoryName
 FROM categories
 WHERE CategoryID = 2;
 
-
+--
+SELECT *
+FROM shippers;

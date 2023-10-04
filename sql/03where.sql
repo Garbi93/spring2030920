@@ -31,8 +31,18 @@ SELECT CustomerID, CustomerName FROM customers WHERE Country = 'UK';
 
 
 -- 예) 2번 카테고리에 있는 상품명과 가격 조회
-SELECT ProductName, Price FROM products WHERE CategoryID = 2;
+SELECT ProductName, Price
+FROM products
+WHERE CategoryID = 2;
+
 -- 예) 일본에 있는 공급자의 이름(supplierName)과 전화번호 조회
-SELECT SupplierName, Phone FROM suppliers WHERE Country = 'japan';
+SELECT SupplierName, Phone
+FROM suppliers
+WHERE Country = 'japan';
+
 -- 예) 2번 카테고리의 이름(categoryName) 조회
-SELECT CategoryName FROM categories WHERE CategoryID = 2;
+SELECT CategoryName
+FROM categories
+WHERE CategoryID = 2;
+
+

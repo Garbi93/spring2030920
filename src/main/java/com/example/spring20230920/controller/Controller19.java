@@ -1,5 +1,6 @@
 package com.example.spring20230920.controller;
 
+import com.example.spring20230920.domain.MyDto15;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -157,8 +158,35 @@ public class Controller19 {
             }
         }
         // 코드 작성
-        model.addAttribute("productList",list);
+        model.addAttribute("productList", list);
 
+    }
+
+    // 자바빈을 사용하여 만들어보기
+    @GetMapping("sub6")
+    public void method6(Model model ) throws Exception{
+        String sql = """
+                SELECT CustomerID, CustomerName, Address, Country
+                FROM customers
+                """;
+
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        List<MyDto15> list = new ArrayList();
+        try (connection; statement; resultSet) {
+            while(resultSet.next()) {
+                MyDto15 dto = new MyDto15();
+                dto.setAddress(resultSet.getString(3));
+                dto.setId(resultSet.getInt(1));
+                dto.setName(resultSet.getString(2));
+                dto.setCountry(resultSet.getString(4));
+
+                list.add(dto);
+            }
+        }
+        model.addAttribute("customerList", list);
     }
 
 

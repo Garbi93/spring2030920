@@ -58,7 +58,17 @@ SELECT COUNT(DISTINCT Country) FROM customers;  -- 21개
 -- 전체 행의 수
 SELECT COUNT(*) FROM customers;
 SELECT COUNT(*) FROM employees;
-SELECT count(*) FROM orders;
+SELECT COUNT(*) FROM orders;
+
+-- 예) 공급자들의 국가 수
+SELECT COUNT(DISTINCT Country) FROM suppliers;
+-- 예) 주문(Order) 건수
+SELECT COUNT(OrderID) FROM orders;
+-- 예) 몇 개의 카테고리가 있는 지 조회
+SELECT COUNT(*) FROM categories;
+-- 예) 고객이 있는 도시수
+SELECT COUNT(DISTINCT Country) FROM customers;
+
 
 
 

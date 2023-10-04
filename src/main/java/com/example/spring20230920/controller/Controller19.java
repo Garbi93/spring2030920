@@ -1,6 +1,7 @@
 package com.example.spring20230920.controller;
 
 import com.example.spring20230920.domain.MyDto15;
+import com.example.spring20230920.domain.MyDto16;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -187,6 +188,34 @@ public class Controller19 {
             }
         }
         model.addAttribute("customerList", list);
+    }
+
+    @GetMapping("sub7")
+    public String method7(Model model) throws Exception {
+        String sql = """
+                SELECT ProductID, ProductName, Unit, Price
+                FROM products
+                """;
+
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        List<MyDto16> list = new ArrayList<>();
+        try (connection; statement; resultSet) {
+            while (resultSet.next()) {
+                MyDto16 dto = new MyDto16();
+                dto.setPid(resultSet.getString(1));
+                dto.setProductName(resultSet.getString(2));
+                dto.setUnit(resultSet.getString(3));
+                dto.setPrice(resultSet.getString(4));
+
+                list.add(dto);
+            }
+        }
+
+        model.addAttribute("productList", list);
+        return "/main19/sub5";
     }
 
 

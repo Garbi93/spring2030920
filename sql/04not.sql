@@ -9,4 +9,3 @@ SELECT * FROM suppliers WHERE NOT Country = 'Japan';
 SELECT * FROM suppliers WHERE Country = 'Japan';
 SELECT * FROM suppliers;
 
---

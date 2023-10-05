@@ -37,3 +37,8 @@ SELECT * FROM customers
 WHERE CustomerName < 'B';   --  사전 순서대로 a가 가장 작은 z가 제일 크다
 
 
+SELECT * FROM employees;
+SELECT * FROM employees
+WHERE BirthDate >= '1960-01-01'; -- 날짜 형식 비교도 가능하다.
+
+

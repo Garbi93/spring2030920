@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,4 +59,29 @@ public class Controller20 {
         return "/main19/sub6";
     }
 
+
+    @GetMapping("sub3")
+    public void method3(String id) throws SQLException {
+        String sql = """
+                SELECT customerId, customerName, country
+                FROM customers
+                WHERE customerId = ?
+                """;
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        statement.setString(1, id);
+//        statement.setInt(1, 3);
+
+        ResultSet resultSet = statement.executeQuery();
+
+        try(connection; statement; resultSet) {
+            while (resultSet.next()) {
+                System.out.println("고객정보");
+                System.out.println("id = " + resultSet.getString(1));
+                System.out.println("name = " + resultSet.getString(2));
+            }
+
+        }
+    }
 }

@@ -84,4 +84,62 @@ public class Controller20 {
 
         }
     }
+
+    // /main20/sub4?pid=5
+    @GetMapping("sub4")
+    public void method4(Integer pid) throws SQLException {
+        String sql = """
+                SELECT productId, productName
+                FROM products
+                WHERE ProductID = ?
+                """;
+        Connection connection = dataSource.getConnection();
+        // preparedStatement 를 사용 한다 이때 sql변수를 여기에 넣어줘야 한다.
+        // prepared로 sql문을 컴파일하고
+        PreparedStatement statement = connection.prepareStatement(sql);
+        // set타입을 저장 하여 where의 인덱스와 받아오는 값의 변수를 넣고
+        // ?를 채우고
+        statement.setInt(1, pid);
+
+        // 기존 statement와 동일하게 executeQuery 로 저장 시켜준다
+        ResultSet resultSet = statement.executeQuery();
+        try(connection; statement; resultSet) {
+            while (resultSet.next()) {
+                System.out.println();
+                System.out.println("상품 정보");
+                System.out.println("상품번호 = " + resultSet.getInt(1));
+                System.out.println("상품명 = " + resultSet.getString(2));
+            }
+
+        }
+
+    }
+    // /main20/sub5?country=spain
+    // 콘솔에 spain에 사는 고객 이름 출력
+    @GetMapping("sub5")
+    public void method5(String country) throws SQLException {
+        String sql = """
+                SELECT Country, CustomerID, CustomerName 
+                FROM customers
+                WHERE Country = ?
+                """;
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, country);
+        ResultSet resultSet = statement.executeQuery();
+
+        try(connection; statement; resultSet) {
+            while (resultSet.next()){
+                System.out.println();
+                System.out.println("고객 정보");
+                System.out.println("나라 = " + resultSet.getString(1));
+                System.out.println("고객 번호 = " + resultSet.getString(2));
+                System.out.println("고객 이름 = " + resultSet.getString(3));
+
+            }
+        }
+
+    }
+
 }

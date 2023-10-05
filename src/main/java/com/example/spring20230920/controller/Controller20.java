@@ -253,6 +253,68 @@ public class Controller20 {
 
     }
 
+    // 국가별로 공급자 조회
+    @GetMapping("sub10")
+    public void method10(Model model) throws SQLException {
+        // 공급자의 국가 목록 조회
+        String sql = """
+                SELECT DISTINCT country
+                FROM suppliers
+                """;
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+
+        List<String> list = new ArrayList<>();
+        try(connection; statement; resultSet){
+            while (resultSet.next()){
+                list.add(resultSet.getString(1));
+            }
+        }
+
+
+        model.addAttribute("countryList", list);
+    }
+
+    @GetMapping("sub11")
+    public void method11(@RequestParam("country") List<String> countryList, Model model) throws Exception {
+        String qustion = "";
+        for (int i = 0; i < countryList.size(); i++) {
+            qustion += "?";
+
+            if (i < countryList.size()-1) {
+                qustion += ", ";
+            }
+        }
+
+        String sql = """
+                SELECT Country, SupplierID, SupplierName
+                FROM suppliers
+                WHERE Country IN (""" + qustion + ")";
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        for (int i = 0; i < countryList.size(); i++) {
+            statement.setString(i+1, countryList.get(i));
+        }
+        ResultSet resultSet = statement.executeQuery();
+
+        List<Map<String, String>> list = new ArrayList<>();
+        try(connection; statement; resultSet) {
+            while (resultSet.next()){
+                Map<String, String> map = new HashMap<>();
+                map.put("country",resultSet.getString(1));
+                map.put("id",resultSet.getString(2));
+                map.put("name",resultSet.getString(3));
+
+                list.add(map);
+            }
+
+        }
+        model.addAttribute("supplierList", list);
+
+
+    }
 
 
 

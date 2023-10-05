@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -179,9 +180,9 @@ public class Controller19 {
         try (connection; statement; resultSet) {
             while(resultSet.next()) {
                 MyDto15 dto = new MyDto15();
-                dto.setAddress(resultSet.getString(3));
                 dto.setId(resultSet.getInt(1));
                 dto.setName(resultSet.getString(2));
+                dto.setAddress(resultSet.getString(3));
                 dto.setCountry(resultSet.getString(4));
 
                 list.add(dto);
@@ -258,6 +259,103 @@ public class Controller19 {
         return "/main19/sub5";
 
     }
+
+    // sub10, sub11 id별 조회
+    @GetMapping("sub10")
+    public void method10() {
+
+    }
+
+    @GetMapping("sub11")
+    public String method11(Integer cid, Model model) throws Exception {
+        //쿼리 작성(method6참고)
+        String sql = """
+                SELECT CustomerID, CustomerName, Address, Country
+                FROM customers
+                WHERE CustomerID = 
+                """;
+        sql += cid;
+
+        // 쿼리 실행
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        List<MyDto15> list = new ArrayList<>();
+
+        // 실행 결과 처리(method6참고), MyDto15 사용
+        try(connection; statement; resultSet) {
+            while (resultSet.next()) {
+                MyDto15 dto = new MyDto15();
+                dto.setId(resultSet.getInt(1));
+                dto.setName(resultSet.getString(2));
+                dto.setAddress(resultSet.getString(3));
+                dto.setCountry(resultSet.getString(4));
+
+                list.add(dto);
+            }
+        }
+        // 처리한 결과 model에 attribute로 넣고
+        model.addAttribute("customerList", list);
+        //view 로 forword
+        return "/main19/sub6";
+    }
+
+    // sub12 , sub13 국가별 조회
+    @GetMapping("sub12")
+    public void method12(Model model) throws SQLException {
+        String sql = """
+                SELECT DISTINCT country
+                FROM customers
+                """;
+
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        List<String> list = new ArrayList<>();
+
+        try(connection; statement; resultSet){
+            while (resultSet.next()){
+                String country = resultSet.getString(1);
+
+                list.add(country);
+            }
+        }
+            model.addAttribute("countryList",list);
+    }
+
+    @GetMapping("sub13")
+    public String method13(String country, Model model) throws SQLException {
+        String sql = """
+                SELECT CustomerID, CustomerName, Address, Country
+                FROM customers
+                WHERE Country = '""" + country + "'";
+
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+        List<MyDto15> list = new ArrayList<>();
+
+        // 실행 결과 처리(method6참고), MyDto15 사용
+        try(connection; statement; resultSet) {
+            while (resultSet.next()) {
+                MyDto15 dto = new MyDto15();
+                dto.setId(resultSet.getInt(1));
+                dto.setName(resultSet.getString(2));
+                dto.setAddress(resultSet.getString(3));
+                dto.setCountry(resultSet.getString(4));
+
+                list.add(dto);
+            }
+        }
+        // 처리한 결과 model에 attribute로 넣고
+        model.addAttribute("customerList", list);
+        //view 로 forword
+        return "/main19/sub6";
+    }
+
+
+
+
 
 
 

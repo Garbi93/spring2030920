@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -204,6 +205,53 @@ public class Controller20 {
         model.addAttribute("productList", list);
     }
 
+    // /main20/sub9?country=spain&country=mexico&country=uk
+    @GetMapping("sub9")
+    public void method9(@RequestParam("country") List<String> countryList) throws SQLException {
+        String questionMarks = "";
+        for (int i = 0; i < countryList.size(); i++) {
+            questionMarks += "?";
+
+            if(i< countryList.size()-1){
+                questionMarks += ", ";
+            }
+        }
+        // 특정 국가에 속한 고객들 조회
+        String sql = """
+                SELECT *
+                FROM customers
+                WHERE country IN ("""
+
+                +
+
+                questionMarks
+
+                +
+
+                """
+                )
+                """;
+
+//        System.out.println("sql = " + sql);
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        for (int i = 0; i < countryList.size() ; i++) {
+            statement.setString(i+1, countryList.get(i));
+        }
+        ResultSet resultSet = statement.executeQuery();
+
+        try(connection; statement; resultSet) {
+            System.out.println("고객목록");
+            while (resultSet.next()) {
+                String name = resultSet.getString(2);
+                String country = resultSet.getString(7);
+
+                System.out.println(name + " : " + country);
+            }
+        }
+
+    }
 
 
 

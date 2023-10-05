@@ -1,6 +1,7 @@
 package com.example.spring20230920.controller;
 
 import com.example.spring20230920.domain.MyDto15;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("main20")
@@ -141,5 +144,71 @@ public class Controller20 {
         }
 
     }
+
+    @GetMapping("sub6")
+    public void method6(String c1, String c2) throws SQLException {
+        String sql = """
+                SELECT customerName, country
+                FROM customers
+                WHERE country =? OR country = ?
+                """;
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, c1); // 물음표 의 위치 앞
+        statement.setString(2, c2); // 물음표 의 위치 뒤
+        ResultSet resultSet = statement.executeQuery();
+
+        try(connection; statement; resultSet) {
+            System.out.println();
+            System.out.println("고객 목록");
+            while (resultSet.next()){
+                String country = resultSet.getString(2);
+                String name = resultSet.getString(1);
+                System.out.println(country + ":" + name);
+            }
+        }
+    }
+
+
+
+    @GetMapping("sub7")
+    public void method7() {
+
+    }
+
+    @GetMapping("sub8")
+    public void method8(Integer min, Integer max, Model model) throws SQLException {
+        String sql = """
+                SELECT ProductName
+                FROM products
+                WHERE Price >= ? AND Price <= ? 
+                """;
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setInt(1, min);
+        statement.setInt(2, max);
+        ResultSet resultSet = statement.executeQuery();
+
+        List<Map<String, String>> list = new ArrayList<>();
+        try (connection; statement; resultSet){
+            while (resultSet.next()){
+                Map<String, String> map = new HashMap();
+                map.put("pName",resultSet.getString(1));
+
+                list.add(map);
+            }
+
+        }
+        model.addAttribute("productList", list);
+    }
+
+
+
+
+
+
+
+
 
 }

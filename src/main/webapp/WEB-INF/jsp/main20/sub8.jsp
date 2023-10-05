@@ -16,10 +16,12 @@
 <table>
     <tr>
         <th>상품명</th>
+        <th>가격</th>
     </tr>
     <c:forEach items="${productList}" var="pro">
         <tr>
             <td>${pro.pName}</td>
+            <td>${pro.price} $</td>
         </tr>
     </c:forEach>
 </table>

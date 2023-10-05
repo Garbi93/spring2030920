@@ -180,7 +180,7 @@ public class Controller20 {
     @GetMapping("sub8")
     public void method8(Integer min, Integer max, Model model) throws SQLException {
         String sql = """
-                SELECT ProductName
+                SELECT ProductName, Price
                 FROM products
                 WHERE Price >= ? AND Price <= ? 
                 """;
@@ -195,6 +195,7 @@ public class Controller20 {
             while (resultSet.next()){
                 Map<String, String> map = new HashMap();
                 map.put("pName",resultSet.getString(1));
+                map.put("price",resultSet.getString(2));
 
                 list.add(map);
             }

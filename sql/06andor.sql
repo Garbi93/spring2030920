@@ -53,4 +53,12 @@ SELECT * FROM orders
 WHERE OrderDate >= '1997-01-01' AND OrderDate < '1998-01-01';
 
 
+-- 여러 연산자 조합시 () 사용해서 우선순위 결정해줄 것
+-- 예) 1번 카테고리인 상품 중 10달러 미만, 100 달러 이상
+-- AND 연산이 우선연산이 된다.
+SELECT * FROM products
+WHERE ((Price < 10 OR Price >= 100) AND CategoryID = 1);
+
+
+
 

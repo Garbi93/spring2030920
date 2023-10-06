@@ -15,7 +15,7 @@
 <h3>공급자 조회 합시다</h3>
 <form action="/main22/sub2">
     공급자 id번호를 넣으세요
-    <input type="number" name="p">
+    <input type="number" name="p" value="1">
     <button>전송</button>
 </form>
 </body>

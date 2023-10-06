@@ -10,6 +10,17 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+
+        tr, td {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <table>
@@ -24,5 +35,12 @@
         </tr>
     </c:forEach>
 </table>
+
+<div>
+    <c:forEach begin="1" end="${lastPageNumber}" var="pageNumber">
+        <a href="/main22/sub2?p=${pageNumber}">${pageNumber}</a>
+        |
+    </c:forEach>
+</div>
 </body>
 </html>

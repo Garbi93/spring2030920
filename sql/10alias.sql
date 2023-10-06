@@ -41,5 +41,5 @@ FROM products JOIN categories
 
 SELECT p.ProductName,
        c.CategoryName
-FROM products AS p JOIN categories AS c
+FROM products AS p JOIN categories AS c -- AS 생략가능
     ON p.CategoryID = c.CategoryID; -- 별칭을 사용하여 위 코드를 줄일 수 있다.

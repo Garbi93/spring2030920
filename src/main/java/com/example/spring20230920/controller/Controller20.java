@@ -312,8 +312,6 @@ public class Controller20 {
 
         }
         model.addAttribute("supplierList", list);
-
-
     }
 
 

@@ -29,3 +29,17 @@ SELECT
     CONCAT(Address, ' ',City, ' ', Country) address,
     Phone `phone number`
 FROM suppliers;
+
+SELECT * FROM products;
+SELECT * FROM categories;
+
+-- 두개의 테이블을 결합하여 보여주기
+SELECT products.ProductName,
+       categories.CategoryName
+FROM products JOIN categories
+    ON products.CategoryID = categories.CategoryID;
+
+SELECT p.ProductName,
+       c.CategoryName
+FROM products AS p JOIN categories AS c
+    ON p.CategoryID = c.CategoryID; -- 별칭을 사용하여 위 코드를 줄일 수 있다.

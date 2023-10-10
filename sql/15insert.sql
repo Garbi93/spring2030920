@@ -26,5 +26,60 @@ INSERT INTO employees(EmployeeID,FirstName,LastName)
 INSERT INTO employees(EmployeeID,FirstName,LastName)
     VALUE (15,'김'); -- 갯수도 맞춰줘야 한다
 
+
+-- 값의 타입에 따라 넣는 방법이 다름
+INSERT INTO employees (EmployeeID)
+VALUE (15); -- 권장
+
+INSERT INTO employees (EmployeeID)
+VALUE ('16');   -- 되긴 됨...
+
+
+-- 텍스트 형식
+INSERT INTO employees (LastName)
+VALUE ('son');
+
+INSERT INTO employees (LastName)
+VALUE ('10000'); -- 텍스트 파일은 따옴표 사용 권장
+
+INSERT INTO employees (LastName)
+VALUE (10000); -- 되긴 됨...
+
+-- 날짜 형식
+INSERT INTO employees(BirthDate)
+VALUE ('2000-01-01');
+
+
 SELECT * FROM employees ORDER BY EmployeeID DESC ;
+
+
+INSERT INTO products(Price)
+VALUE (20.10);
+
+INSERT INTO products(Price)
+VALUE ('30.33'); -- 되긴 됨...
+
+INSERT INTO products(Price)
+VALUE ('thirteen'); -- 대놓고 텍스트인건 안됨...
+
+--
+SELECT * FROM products ORDER BY ProductID DESC;
+-- 예) 82번 상품 입력(productId productName supplierId categoryId unit price)
+INSERT INTO products(productid, productname, supplierid, categoryid, unit, price)
+VALUE (82, '의자',1000,1001,'1EA',15.01);
+-- 예) 새 상품 입력( productName supplierId categoryId unit price)
+INSERT INTO products(productname, supplierid, categoryid, unit, price)
+VALUE ('책상',1000,1001,'1EA',30.01);
+
+SELECT * FROM suppliers
+ORDER BY SupplierID DESC;
+
+SELECT * FROM employees
+ORDER BY EmployeeID DESC;
+
+
+
+
+
+
 

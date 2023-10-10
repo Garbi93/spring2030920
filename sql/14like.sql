@@ -10,7 +10,7 @@ SELECT * FROM customers
 WHERE CustomerName LIKE '%ch%';
 
 -- LIKE : 검색
--- %,_ 기호와 같이 사용됨
+-- %,_ 기호(wildcard)와 같이 사용됨
 
 -- ch로 시작하는 문자
 SELECT  * FROM customers
@@ -35,6 +35,23 @@ WHERE LastName LIKE '____';
 -- 첫글자 아무거나 한글자이고 2번째 글자가 e인 직원 찾기
 SELECT * FROM employees
 WHERE LastName LIKE '_e%';
+
+
+-- 예) ch로 시작하는 상품명 조회
+SELECT * FROM products
+WHERE ProductName LIKE 'ch%';
+
+-- 예) es로 끝나는 상품명 조회
+SELECT * FROM products
+WHERE ProductName LIKE '%es';
+
+-- 예) 중간에 use가 들어간 상품명 조회
+SELECT * FROM products
+WHERE ProductName LIKE '%use%';
+
+-- 예) 두번째 글자가 u인 상품명 조회
+SELECT * FROM products
+WHERE ProductName LIKE '_u%';
 
 
 

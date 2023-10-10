@@ -156,7 +156,42 @@ public class Controller23 {
 
     }
 
+//    -------------------------------------------------------------------------------------------
 
+    @GetMapping("sub100")
+    public void method100(
+            @RequestParam(value = "a",defaultValue = "") String address,
+            Model model
+
+    ) throws SQLException {
+        String sql = """
+                SELECT  City, SupplierID, Address
+                FROM suppliers
+                WHERE Address LIKE ?
+                """;
+
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, "%"+address+"%");
+        ResultSet resultSet = statement.executeQuery();
+
+        List<Map<String, Object>> list = new ArrayList<>();
+        try(connection; statement; resultSet) {
+            while (resultSet.next()) {
+                String cityName = resultSet.getString("city");
+                String supplierID = resultSet.getString("supplierID");
+                String supplierAD = resultSet.getString("Address");
+
+                list.add(Map.of("city",cityName,"supplierID",supplierID,"address",supplierAD));
+            }
+            model.addAttribute("supplierList",list);
+        }
+
+
+
+
+    }
 
 
 }

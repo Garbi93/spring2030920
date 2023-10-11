@@ -1,5 +1,6 @@
 package com.example.spring20230920.controller;
 
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -176,8 +175,116 @@ public class Controller25 {
     }
 
 
+    @GetMapping("sub7")
+    public void method7(@RequestParam(value = "id",defaultValue = "1") Integer employeeId, Model model) throws SQLException {
+        String sql = """
+                SELECT * FROM employees
+                WHERE employeeId = ?
+                """;
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        try (connection; statement) {
+            statement.setInt(1, employeeId);
+
+            ResultSet resultSet = statement.executeQuery();
+            try (resultSet) {
+                if (resultSet.next()) {
+                    String lastName = resultSet.getString("lastName");
+                    String firstName = resultSet.getString("firstName");
+
+                    LocalDate birthDate = resultSet.getTimestamp("birthDate").toLocalDateTime().toLocalDate();
+                    String photo = resultSet.getString("photo");
+                    String notes = resultSet.getString("notes");
+
+                    model.addAttribute("employee", Map.of(
+                            "lastName", lastName,
+                            "firstName", firstName,
+                            "birthDate", birthDate,
+                            "photo", photo,
+                            "notes", notes,
+                            "employeeId", employeeId
+                    ));
+                }
+            }
+        }
+
+    }
+
+    @PostMapping("sub7")
+    public void method7 (
+            @RequestParam("id") Integer employeeId,
+            @RequestParam("lastName") String lastName,
+            @RequestParam("firstName") String firstName,
+            @RequestParam("birthDate") Date birthDate,
+            @RequestParam("photo") String photo,
+            @RequestParam("notes") String notes
+    ) throws SQLException {
+        String sql = """
+                UPDATE employees
+                SET 
+                    LastName = ?,
+                    FirstName = ?,
+                    BirthDate = ?,
+                    Photo = ?,
+                    Notes = ?
+                WHERE EmployeeID = ?
+                """;
+
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+
+        try (connection; statement) {
+            statement.setString(1, lastName);
+            statement.setString(2, firstName);
+            statement.setDate(3, birthDate);
+            statement.setString(4, photo);
+            statement.setString(5, notes);
+            statement.setInt(6, employeeId);
+
+            int rows = statement.executeUpdate();
+            if(rows == 1) {
+                System.out.println("변경이 잘 됨");
+            }else  {
+                System.out.println("잘못 됨");
+            }
+        }
+    }
 
 
+    //---------------------------------------------------------------------------------------
+    // 리다이렉트 복습
+    // Seestion으로 저장하는건 비교적 위험하지만
+    // 저장 하고 싶을때는 addAttribut와 addFlashAttribute 를 사용하자.
+    @GetMapping("sub9")
+    public String method9 (RedirectAttributes rttr) {
+        // Controller의 request handler 메소드의 리턴이
+        // void (또는 null 리턴)이면 view 의 이름으로 해석
+
+        // String 이면 view 의 이름으로 해석
+        // "redirect:" 접두어가 붙으면
+        // 응답코드가 302이고 location 응답헤더의 값이 접두어 이후의 값으로 셋팅
+
+        // 쿼리스트링에 request parameter로 붙음
+        rttr.addAttribute("abc","def");
+        rttr.addAttribute("address","seoul");
+
+        // 모델에 붙임 (session을 잠깐 거침)
+        rttr.addFlashAttribute("email","abc@gmail.com");
+
+        //return "redirect:https://www.naver.com"; // 네이버로 가는 응답
+        return "redirect:/main25/sub10"; // 로컬데이터 에서 요청 하면
+    }
+
+    @GetMapping("sub10")
+    public void method10 (Model model) {
+        Object email = model.getAttribute("email");
+        System.out.println("email = " + email);
+        System.out.println("Controller25.method10");
+
+    }
+    //---------------------------------------------------------------------------------------
 
 
 

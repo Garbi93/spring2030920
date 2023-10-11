@@ -60,13 +60,17 @@ public class Controller25 {
 
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(sql);
-        statement.setInt(1, deleteId);
 
-        int rows = statement.executeUpdate();
-        if(rows == 1 ) {
-            System.out.println(rows + "의 데이터가 잘 삭제 되었습니다.");
-        }else {
-            System.out.println("데이터가 잘 삭제 되지 않았습니다.");
+        try(connection; statement) {
+            statement.setInt(1, deleteId);
+            int rows = statement.executeUpdate();
+            if(rows == 1 ) {
+                System.out.println(rows + "의 데이터가 잘 삭제 되었습니다.");
+
+            }else {
+                System.out.println("데이터가 잘 삭제 되지 않았습니다.");
+            }
+
         }
 
     }

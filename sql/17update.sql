@@ -44,3 +44,4 @@ UPDATE products
 SET Price = Price * 2
 WHERE CategoryID = 1; -- 1 번 카테고리 제품들의 가격을 2배 올리기
 
+SELECT * FROM shippers;

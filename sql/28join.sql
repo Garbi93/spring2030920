@@ -95,9 +95,11 @@ WHERE ProductName = 'chais'; -- 여러 테이블 join, on 시키는 방법
 
 
 -- 예) 'chang'상품의 공급자명, 카테고리명을 조회
-SELECT p.ProductName, c.CategoryName
+SELECT p.ProductName, c.CategoryName, s.SupplierName
 FROM products p JOIN categories c
 ON p.CategoryID = c.CategoryID
+JOIN suppliers s
+ON s.SupplierID = p.SupplierID
 WHERE p.ProductName = 'chang';
 
 -- 예) '1996-07-09'에 주문한고객명과, 처리한 직원명
@@ -115,5 +117,18 @@ ON o.OrderID = od.OrderID
 JOIN products p
 ON od.ProductID = p.ProductID
 WHERE o.OrderDate = '1996-07-09';
+
+-- 예) 'chang' 상품이 주문된 날짜들
+SELECT p.ProductName, o.OrderDate, c.CustomerName, CONCAT(e.FirstName, ' ', e.LastName) Fullname
+FROM products p JOIN orderdetails od
+ON p.ProductID = od.ProductID
+JOIN orders o
+ON od.OrderID = od.OrderID
+JOIN customers c
+ON o.CustomerID = c.CustomerID
+JOIN employees e
+ON o.EmployeeID = e.EmployeeID
+WHERE p.ProductName = 'chang';
+
 
 

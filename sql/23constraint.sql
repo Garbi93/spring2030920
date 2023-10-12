@@ -109,4 +109,45 @@ CREATE TABLE my_table19 (
     col1 INT NOT NULL UNIQUE DEFAULT 100
 );
 
+SELECT * FROM my_table19;
+
+--
+-- 테이블의 각 컬럼의 타입, 제약사항 등을 확인
+-- DESCRIBE, DESC
+DESC my_table18;
+DESC my_table15; -- UNI는 UNIQUE / PRI는 NOT NULL과 UNIQUE를 같이 사용할때 KEY 에 보인다.
+
+--
+-- TABLE 생성 쿼리 확인
+SHOW CREATE TABLE my_table15;
+# CREATE TABLE `my_table15` (
+#                               `col1` int(11) DEFAULT NULL,
+#                               `col2` int(11) NOT NULL,
+#                               `col3` int(11) DEFAULT NULL,
+#                               `col4` int(11) NOT NULL,
+#                               UNIQUE KEY `col4` (`col4`),
+#                               UNIQUE KEY `col3` (`col3`)
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+-- CHECK : 값의 유효범위 체크
+CREATE TABLE my_table20 (
+    col1 INT,
+    col2 INT CHECK ( col2 > 100 ),
+    col3 INT CHECK ( col3 > 1000 AND col3 < 2000)
+);
+DESC my_table20; -- check 는 제약 사항이 안보인다 인텔리 제이에서 보도록 하자
+SHOW CREATE TABLE my_table20;
+# CREATE TABLE `my_table20` (
+#                               `col1` int(11) DEFAULT NULL,
+#                               `col2` int(11) DEFAULT NULL CHECK (`col2` > 100),
+#                               `col3` int(11) DEFAULT NULL CHECK (`col3` > 1000 and `col3` < 2000)
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
+INSERT INTO my_table20(col1, col2, col3)
+VALUE (1000, 50, -10); -- not ok
+INSERT INTO my_table20(col1, col2, col3)
+    VALUE (1000, 150, 1500); -- ok
+
+SELECT * FROM my_table20;
+
 

@@ -51,3 +51,15 @@ JOIN products p
 ON od.ProductID = p.ProductID
 GROUP BY c.CustomerID
 ORDER BY `주문 금액` DESC; -- vip 조회하기
+
+-- 10만 달러 이상 소비한 고객 조회
+SELECT * FROM
+                       (SELECT c.CustomerID,c.CustomerName 고객명, SUM(p.price * od.Quantity) `주문 금액`
+FROM customers c JOIN orders o
+                      ON c.CustomerID = o.CustomerID
+                 JOIN orderdetails od
+                      ON o.OrderID = od.OrderID
+                 JOIN products p
+                      ON od.ProductID = p.ProductID
+GROUP BY c.CustomerID) t1
+WHERE t1.`주문 금액` >= 100000;

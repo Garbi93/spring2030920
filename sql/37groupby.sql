@@ -28,23 +28,26 @@ GROUP BY o.OrderDate;
 
 -- 예) 직원별 총 주문 처리 금액 조회
 -- 직원명, 직원별 주문 처리액
-SELECT CONCAT(e.LastName, ' ', FirstName) 직원명, SUM(p.Price * od.Quantity) `처리 금액`
+SELECT e.EmployeeID,CONCAT(e.LastName, ' ', FirstName) 직원명, SUM(p.Price * od.Quantity) `처리 금액`
 FROM employees e JOIN orders o
 ON e.EmployeeID = o.EmployeeID
 JOIN orderdetails od
 ON o.OrderID = od.OrderID
 JOIN products p
 ON od.ProductID = p.ProductID
-GROUP BY e.EmployeeID;
+WHERE o.OrderDate >='1996-08-01' AND o.OrderDate < '1996-09-01'
+GROUP BY e.EmployeeID
+ORDER BY `처리 금액` DESC; -- 96년 8월 영업왕 조회
 
 
 -- 예) 고객별 총 주문 금액 조회
 -- 고객명 , 고객별 주문 금액
-SELECT c.CustomerName 고객명, SUM(p.price * od.Quantity) `주문 금액`
+SELECT c.CustomerID,c.CustomerName 고객명, SUM(p.price * od.Quantity) `주문 금액`
 FROM customers c JOIN orders o
 ON c.CustomerID = o.CustomerID
 JOIN orderdetails od
 ON o.OrderID = od.OrderID
 JOIN products p
 ON od.ProductID = p.ProductID
-GROUP BY c.CustomerID;
+GROUP BY c.CustomerID
+ORDER BY `주문 금액` DESC; -- vip 조회하기

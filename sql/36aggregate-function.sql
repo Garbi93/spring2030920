@@ -52,5 +52,32 @@ SELECT MIN(IFNULL(Price, 0)) FROM products;
 SELECT * FROM products
 WHERE IFNULL(Price,0) = (SELECT MIN(IFNULL(Price, 0)) FROM products); -- 서브쿼리에서 부르고싶으면 where에 비교대상도 ifnull을 사용해야 한다.
 
+-- SUM : 합
+SELECT * FROM products;
+SELECT SUM(Price) FROM products; -- 모든 물건의 가격 합 null은 포함 하지 않음
+
+SELECT SUM(od.Quantity)
+FROM orders o JOIN orderdetails od
+ON o.OrderID = od.OrderID
+WHERE o.OrderDate = '1996-07-04'; -- 96년 7월 4일 에 주문한 제품의 수량 조회
+
+-- 예) 96년 7월 4일 매출액 구하기
+SELECT SUM(od.Quantity*p.Price) 매출액
+FROM orders o JOIN orderdetails od
+ON o.OrderID = od.OrderID
+JOIN products p
+ON od.ProductID = p.ProductID
+WHERE o.OrderDate = '1996-07-04';
+
+
+--
+-- AVG :평균
+SELECT AVG(Price) FROM products; -- 28.866364 -- 아까 null을 넣은값을 포함하지 않고 계산된듯 하다
+SELECT SUM(Price) FROM products; -- 2222.71 총합
+SELECT COUNT(*) FROM products; -- 78
+SELECT COUNT(Price) FROM products; -- 77
+
+
+
 
 

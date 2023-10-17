@@ -7,7 +7,7 @@ SELECT  * FROM products;
 -- MAX 최대값
 SELECT MAX(Price) FROM products;
 SELECT * FROM products ORDER BY Price DESC; -- 제일비싼 상품은 Côte de Blaye 인데
-SELECT ProductName, MAX(Price) FROM products; -- name으로 부르면 charis가 나온다 집계함수는 테이블의 로우 값만 뽑아 오기 때문에
+SELECT ProductName, MAX(Price) FROM products; -- name으로 부르면 chais가 나온다 집계함수는 테이블의 로우 값만 뽑아 오기 때문에
 -- 같은 줄을 불러오지 않는다. 따라서 지정한 값 과 연동 된 줄을 불러 올 수 없다.
 
 SELECT * FROM products

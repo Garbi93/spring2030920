@@ -11,4 +11,5 @@ public interface MyDao2 {
     WHERE EmployeeID = ${id}
     """)
     String select(Integer id);
+
 }

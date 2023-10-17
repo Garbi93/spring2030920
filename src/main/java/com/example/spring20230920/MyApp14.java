@@ -28,6 +28,7 @@ public class MyApp14 {
 
 // Configuration 클래스(빈) :
 // spring bean을 만드는 메소드를 가진 클래스
+// 내가 만들것이 아닌 이미 만들어진 어떠한 코드를 갖고 올때 bean으로 만들어 사용 하고 싶을때에 configuration을 사용합니다.
 
 @Configuration
 class Configuration1 {

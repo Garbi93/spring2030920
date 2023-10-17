@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-// Autowired 를 사용 한것
+// Autowired 를 사용 한것 생성자 주입
 @SpringBootApplication
 public class MyApp7 {
     public static void main(String[] args) {

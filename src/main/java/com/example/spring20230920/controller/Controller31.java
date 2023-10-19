@@ -15,10 +15,15 @@ public class Controller31 {
 
     @GetMapping("sub1")
     public void method1() {
-        String res1 = dao.selec1("Mexico"); // 맥시코 고객만
+        String res1 = dao.select1("Mexico"); // 맥시코 고객만
         System.out.println("res1 = " + res1);
 
-        String res2 = dao.selec1(null); // 전체 고객조회
+        String res2 = dao.select1(null); // 전체 고객조회
         System.out.println("res2 = " + res2);
+    }
+
+    @GetMapping("sub2")
+    public void method2(Integer num) {
+        dao.select2(num);
     }
 }

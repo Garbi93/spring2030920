@@ -146,8 +146,33 @@ public class Controller30 {
         }else {
             rttr.addFlashAttribute("message","정보가 수정 되지 않았습니다.");
         }
+        // 쿼리 스트링 추가
         rttr.addAttribute("id", employee.getId());
 
         return "redirect:/main30/sub13";
+    }
+
+    // GET/main30/sub15?id=3
+    @GetMapping("sub15")
+    public void method (Integer id, Model model) {
+        MyDto34customer customer = dao.select9(id);
+        // 3번 고객 조회 -> view로 포워딩
+        model.addAttribute("customer", customer);
+    }
+
+
+    // POST /main30/sub16
+    // 고객 정보 수정 -> /main30/sub15?id=3 으로 redirect
+    @PostMapping("sub16")
+    public String method16(MyDto34customer customer, RedirectAttributes rttr) {
+        int rows = dao.update2(customer);
+        if(rows == 1){
+            rttr.addAttribute("message" , "고객정보 업데이트가 잘 되었습니다.");
+        }else {
+            rttr.addAttribute("message","고객 업데이트가 실패 했습니다.");
+        }
+        rttr.addAttribute("id", customer.getId());
+
+        return "redirect:/main30/sub15";
     }
 }

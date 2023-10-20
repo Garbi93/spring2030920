@@ -26,6 +26,6 @@ public class Controller32 {
     public void method2(MyDto38 dto) {
         dao.inset2(dto); // 직원 테이블에 lastName 입력
 
-        System.out.println("dto = " + dto); // 새 직원의 번호(키)와 lastName출력
+        System.out.println("dto = " + dto); // 새 직원의 번호(pk)와 lastName출력
     }
 }

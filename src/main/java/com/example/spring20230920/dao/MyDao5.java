@@ -205,7 +205,7 @@ public interface MyDao5 {
                 <foreach collection="city" item="elem" open=" IN ( "
                                  separator="," close=")">
                             #{elem}
-                         </foreach>
+                         </foreach> 
             </if>
             <if test='type == "2"'>
                 country

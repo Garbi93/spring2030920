@@ -2,12 +2,15 @@ package com.example.spring20230920.controller;
 
 import com.example.spring20230920.dao.MyDao6;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component
+// 실제로 업무 하는 단위 를 service 라고 한다
+//@Component
+@Service
 @RequiredArgsConstructor
-public class MyComponent1 {
+public class MyService1 {
+
 
     private final MyDao6 dao;
 

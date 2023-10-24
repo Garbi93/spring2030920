@@ -22,7 +22,7 @@ public class Controller34 {
     private final S3Client s3Client;
 
     @Value("${aws.bucketName}")
-    private String bucketName;
+    private String bucketName; // 버킷 이름은 숨겨두자
 
     @GetMapping("sub1")
     public void method1() {
@@ -33,11 +33,11 @@ public class Controller34 {
     public void method2(MultipartFile file) throws IOException {
 
         if(file != null && file.getSize() >0) {
-            String key ="temp/" + file.getOriginalFilename();
+            String key ="temp/" + file.getOriginalFilename(); // 파일 경로
 
             PutObjectRequest objectRequest = PutObjectRequest.builder()
                     .bucket(bucketName)
-                    .acl(ObjectCannedACL.PUBLIC_READ)
+                    .acl(ObjectCannedACL.PUBLIC_READ) // 누구든지 볼수 있게 권한을 주는것을 중간에 넣어준다.
                     .key(key)
                     .build();
 

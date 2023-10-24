@@ -1,5 +1,7 @@
 package com.example.spring20230920.controller;
 
+import com.example.spring20230920.dao.MyDao7;
+import com.example.spring20230920.domain.MyDto41;
 import com.example.spring20230920.domain.MyDto42;
 import com.example.spring20230920.domain.MyDto43;
 import com.example.spring20230920.domain.MyDto44;
@@ -16,6 +18,8 @@ import java.util.Map;
 @RequestMapping("main37")
 @RequiredArgsConstructor
 public class Controller37 {
+
+    private final MyDao7 dao;
 
     /*
     axios.post("/main37/sub1",'{"name":"jones"}',{
@@ -139,6 +143,20 @@ public class Controller37 {
         System.out.println("dto.getPrice() = " + dto.getPrice());
         System.out.println("dto.getWeight() = " + dto.getWeight());
         System.out.println("dto.getMarried() = " + dto.getMarried());
+    }
+
+    /*
+    axios.put("/main37/sub7",{
+        id:3,
+        firstName: "kim",
+        lastName: "minjae",
+        birthDate: "1999-09-09"
+    })
+     */
+    @PutMapping("sub7")
+    public void method7(@RequestBody MyDto41 dto) {
+        int i = dao.updateByEmployeeId(dto);
+        System.out.println(dto.getId()+ "번 직원 수정됨");
     }
 
 }

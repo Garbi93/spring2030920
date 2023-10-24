@@ -1,9 +1,8 @@
 package com.example.spring20230920.dao;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import com.example.spring20230920.domain.MyDto40;
+import com.example.spring20230920.domain.MyDto41;
+import org.apache.ibatis.annotations.*;
 
 import java.time.LocalDate;
 import java.util.Map;
@@ -46,4 +45,23 @@ public interface MyDao7 {
         WHERE CustomerID = #{cid}
         """)
     int deleteByCustomerId(Integer cid);
+
+    @Update("""
+        UPDATE products
+        SET price = #{price},
+            CategoryID = #{category},
+            productName = #{name}
+            WHERE
+            productId = #{id}
+        """)
+    int updateProduct(MyDto40 dto);
+
+    @Update("""
+        UPDATE employees
+        SET LastName = #{lastName},
+            FirstName = #{firstName},
+            BirthDate = #{birthDate}
+        WHERE EmployeeID = #{id}
+        """)
+    int updateByEmployeeId(MyDto41 dto);
 }

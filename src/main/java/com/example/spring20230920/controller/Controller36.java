@@ -1,6 +1,9 @@
 package com.example.spring20230920.controller;
 
 import com.example.spring20230920.dao.MyDao7;
+import com.example.spring20230920.domain.MyDto39;
+import com.example.spring20230920.domain.MyDto40;
+import com.example.spring20230920.domain.MyDto41;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -163,8 +166,99 @@ public class Controller36 {
     public void mehthod12(@PathVariable Integer cid) {
         int cRow = dao.deleteByCustomerId(cid);
         System.out.println(cRow + "만큼 고객이 지워졌습니다.");
-
     }
+
+
+    // put 요청은 업데이트 할때에 주로 요청 된다.
+    // url은 꼭 작성 되어 있어야 한다.
+    /*
+    axios.put("/main36/sub13")
+    put /main36/sub13
+     */
+//    @RequestMapping(method = RequestMethod.PUT, value = "sub13")
+    @PutMapping("sub13") // putMapping으로 간단하게 작성 가능하다.
+    public void method13() {
+        System.out.println("Controller36.method13");
+    }
+
+
+
+    /*
+    axios.put("/main36/sub14", {
+            name: "son",
+            address: "korea"
+    }, {
+        headers : {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+    })
+     */
+    // put /main36/sub14
+    // name=son*&address=korea
+    @PutMapping("sub14")
+    public void method14(String name, String address) {
+        System.out.println("name = " + name);
+        System.out.println("address = " + address);
+    }
+
+
+    /*
+    axios.put("/main36/sub15", {
+        city: "seoul",
+        age: 78,
+        score: 3.14
+    }, {
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+    })
+     */
+    @PutMapping("sub15")
+    public void method15(MyDto39 dto) {
+        System.out.println("city = " + dto.getCity());
+        System.out.println("age = " + dto.getAge());
+        System.out.println("score = " + dto.getScore());
+    }
+
+
+
+    /*
+    axios.put("/main36/sub16", {
+        id: 3,
+        name: "햄버거",
+        category: 2,
+        price: 5000.00
+    },{
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+    })
+     */
+    @PutMapping("sub16")
+    public void method16(MyDto40 dto) {
+        int row = dao.updateProduct(dto);
+        System.out.println(row + "개 데이터 수정됨");
+    }
+
+
+    /*
+    axios.put("/main36/sub17", {
+        lastName: "lee",
+        firstName: "kangin",
+        birthDate: "2020-01-01",
+        id: 5
+    },{
+        headers: {
+            "content-type": "application/x-www-form-urlencoded"
+        }
+    })
+     */
+    @PutMapping("sub17")
+    public void method17(MyDto41 dto) {
+        int eRow = dao.updateByEmployeeId(dto);
+        System.out.println(eRow + "만큼 변경됨");
+    }
+
 
 
 

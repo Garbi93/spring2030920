@@ -168,5 +168,129 @@
         }
     </script>
 </div>
+
+<div>
+    <button onclick="ajax11()">button11</button>
+    <script>
+        function ajax11() {
+            axios.get("/main38/sub4")
+                .then(response => response.data)
+                // .then(data => console.log(data.price)); // 3000 -> 이것을 구조분해할당으로 바꾸자면
+                .then(({price, birth,list,city}) => console.log(price)); // 이런식으로 구조분해할당 형식으로 받아 사용 가능하다.
+        }
+    </script>
+</div>
+
+<div>
+    <button onclick="ajax12()">button12</button>
+    <script>
+        function ajax12() {
+            axios.get("/main38/sub4")
+                .then(({data})=> console.log(data.price));
+        }
+    </script>
+</div>
+
+<div>
+    <button onclick="ajax13()">button13</button>
+    <script>
+        function ajax13() {
+            axios.get("/main38/sub4")
+                .then(response => response.data)
+                .then(({price, city, country = "korea"}) => {
+                    console.log(price); // 3000
+                    console.log(city); // seoul
+                    console.log(country); //korea
+                })
+        }
+    </script>
+</div>
+
+<script>
+    // 구조 분해 할당
+    // Destructuring assignment
+    let a = {
+        name : "son",
+        age : 30
+    };
+    console.log(a.name);
+    console.log(a.age);
+    //
+
+    // 다른값으로 받아 오는것을 할당!! 이라고 한다
+    let myName = a.name;
+    let myAge = a.age;
+    console.log(myName);
+    console.log(myAge);
+
+    let {name, age} = a; // 이게 구조분해 할당 destructuring assignment
+    console.log(name); // son
+    console.log(age); // 30
+
+
+    let b = {
+        city: "seoul",
+        country: "korea"
+    };
+    // console.log(b.city);
+    // console.log(b.country);
+    let {city, country} = b // 구조분해 할당 을 이용하여 값 지정
+    console.log(city);
+    console.log(country);
+
+    let c = {
+        email : "abc@gmail.com",
+        price : 300
+    };
+    // let{email, price} = c;
+    let { email } = c; // 분해한 일부분만 할당 하여 사용도 가능하다.
+
+    let d = {
+        name2 : "lee",
+        address: "paris",
+        age: 77
+    }
+    let {name2, address} = d; // 일 부분만 할당.
+
+    let e = {
+        city2: "seoul",
+        country2: "korea"
+    }
+    let {city2, country2, category} = e; // 초과 할당 하였을때는 설정 되어 있지 않은것은 undefiend
+    console.log(city2); // seoul
+    console.log(country2); // korea
+    console.log(category); // undefined
+
+
+    let f = {
+        name3 : "kim",
+        city3 : "busan"
+    }
+    let {name3, city3="서울", address3 = "신촌"} = f; // 초과 할당 한 값에 undefined 가 아닌 값을 주고 싶을때는 이처럼 사용 하면 된다.
+    // 값이 있는 경우에는 기본값이 안들어 가고 넣으려는 값이 들어간다.
+    console.log(name3);
+    console.log(city3);
+    console.log(address3);
+
+    // 배열에서도 구조분해할당 가능
+    let g = [30,40,50];
+    let [h, i, j] =g; // 구조분해할당
+    console.log(h);
+    console.log(i);
+    console.log(j);
+
+    let [k, l] = g; // 배열도 마찬가지로 다 할당할 필요없다,
+    console.log(k);
+    console.log(l);
+
+    let [m, ...n] = g; // ...n n에 배열 나머지 모든것을 넣은 배열을 만든다.
+    console.log(m);
+    console.log(n); // [40, 50]
+
+    let [...o] = g;
+    console.log(o); // [30, 40, 50]
+</script>
+
+
 </body>
 </html>

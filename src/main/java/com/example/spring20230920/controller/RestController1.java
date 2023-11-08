@@ -6,15 +6,14 @@ import com.example.spring20230920.domain.MyDto34customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@ResponseBody // 모든메소드에 적용됨
+@RestController // @Controller + @ResponseBody
 @RequiredArgsConstructor
 @RequestMapping("api/main1")
 public class RestController1 {
@@ -23,7 +22,6 @@ public class RestController1 {
 
     // http://localhost:8080/api/main1/sub1
     @GetMapping("sub1")
-    @ResponseBody
     public String method1() {
         return "customer name";
     }
@@ -32,20 +30,17 @@ public class RestController1 {
     // get 요청시
     // 5번 고객의 customerName 응답
     @GetMapping("sub2")
-    @ResponseBody
     public String method2( ) {
         return dao.FindCustomer();
     }
 
     @GetMapping("sub3")
-    @ResponseBody
     public MyDto34customer method3( ) {
         return dao.getCustomer();
     }
 
     // /api/main/sub4?id=33
     @GetMapping("sub4")
-    @ResponseBody
     public ResponseEntity<MyDto34customer> method4(String id) {
         MyDto34customer customer = dao.getCustomerById(id);
         if(customer == null) {
@@ -56,7 +51,6 @@ public class RestController1 {
     }
 
     @GetMapping("sub5")
-    @ResponseBody
     public MyDto33Employee method (Integer id) {
         return dao.getEmployeeId(id);
     }
@@ -68,7 +62,6 @@ public class RestController1 {
     }
 
     @GetMapping("sub7")
-    @ResponseBody
     public List<Integer> method7() {
         return dao.getEmployeeIdList();
     }

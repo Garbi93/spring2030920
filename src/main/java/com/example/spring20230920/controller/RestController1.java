@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Controller
-@ResponseBody // 모든메소드에 적용됨
+//@Controller
+//@ResponseBody // 모든메소드에 적용됨
 @RestController // @Controller + @ResponseBody
 @RequiredArgsConstructor
 @RequestMapping("api/main1")

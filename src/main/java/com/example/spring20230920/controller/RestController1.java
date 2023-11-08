@@ -3,6 +3,7 @@ package com.example.spring20230920.controller;
 import com.example.spring20230920.dao.MyDao10;
 import com.example.spring20230920.domain.MyDto34customer;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,6 @@ import java.util.Map;
 public class RestController1 {
 
     private final MyDao10 dao;
-
-
 
     // http://localhost:8080/api/main1/sub1
     @GetMapping("sub1")
@@ -41,4 +40,25 @@ public class RestController1 {
     public MyDto34customer method3( ) {
         return dao.getCustomer();
     }
+
+    // /api/main/sub4?id=33
+    @GetMapping("sub4")
+    @ResponseBody
+    public ResponseEntity<MyDto34customer> method4(String id) {
+        MyDto34customer customer = dao.getCustomerById(id);
+        if(customer == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(customer);
+    }
 }
+
+
+
+
+
+
+
+
+

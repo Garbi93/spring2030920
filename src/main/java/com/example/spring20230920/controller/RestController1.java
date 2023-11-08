@@ -1,6 +1,7 @@
 package com.example.spring20230920.controller;
 
 import com.example.spring20230920.dao.MyDao10;
+import com.example.spring20230920.domain.MyDto33Employee;
 import com.example.spring20230920.domain.MyDto34customer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,14 @@ public class RestController1 {
 
         return ResponseEntity.ok(customer);
     }
+
+    @GetMapping("sub5")
+    @ResponseBody
+    public MyDto33Employee method (Integer id) {
+        return dao.getEmployeeId(id);
+    }
+
+
 }
 
 
